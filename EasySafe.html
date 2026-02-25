@@ -60,6 +60,11 @@
   .otp-input:focus{border-color:var(--accent-border)}
   .otp-input::placeholder{color:var(--text-faint);font-size:15px;letter-spacing:0;font-weight:400;font-family:'Barlow',sans-serif}
   .login-back{background:none;border:none;color:var(--text-faint);font-size:13px;cursor:pointer;font-family:inherit;margin-top:12px;text-decoration:underline}
+  .login-link{background:none;border:none;color:var(--accent);font-size:13px;cursor:pointer;font-family:inherit;margin-top:8px;text-decoration:underline;display:inline-block}
+  .login-divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--text-faint);font-size:12px}
+  .login-divider::before,.login-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+  .pw-requirements{font-size:12px;color:var(--text-faint);margin:-8px 0 14px;text-align:left}
+  .login-skip{background:none;border:none;color:var(--text-faint);font-size:13px;cursor:pointer;font-family:inherit;margin-top:12px;text-decoration:underline}
 
   header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding:20px 28px;border-bottom:1px solid var(--hover);background:linear-gradient(180deg,rgba(122,158,126,.03) 0%,transparent 100%)}
   .header-left{display:flex;align-items:center;gap:14px}
@@ -179,23 +184,16 @@
 <div class="modal-overlay" id="deleteModal"><div class="modal"><p>Permanently remove this firearm and its photos from your inventory?</p><div class="modal-actions"><button class="btn btn-cancel" onclick="closeDeleteModal()">Cancel</button><button class="btn btn-danger" onclick="confirmDelete()">Delete</button></div></div></div>
 <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()"><img id="lightboxImg" src="" alt=""></div>
 
-<!-- Safe door icon SVG reused across app -->
 <svg style="display:none">
   <symbol id="safe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-    <!-- Safe door outline -->
     <rect x="2" y="2" width="20" height="20" rx="2" stroke-width="1.8"/>
-    <!-- Inner panel -->
     <rect x="5" y="5" width="14" height="14" rx="1" stroke-width="1.2"/>
-    <!-- Dial/wheel -->
     <circle cx="12" cy="12" r="3.5" stroke-width="1.4"/>
-    <!-- Dial tick marks -->
     <line x1="12" y1="8.5" x2="12" y2="9.5" stroke-width="1.2"/>
     <line x1="12" y1="14.5" x2="12" y2="15.5" stroke-width="1.2"/>
     <line x1="8.5" y1="12" x2="9.5" y2="12" stroke-width="1.2"/>
     <line x1="14.5" y1="12" x2="15.5" y2="12" stroke-width="1.2"/>
-    <!-- Handle -->
     <line x1="18" y1="10" x2="18" y2="14" stroke-width="1.8" stroke-linecap="round"/>
-    <!-- Hinges -->
     <circle cx="3.5" cy="7" r="0.7" fill="currentColor" stroke="none"/>
     <circle cx="3.5" cy="17" r="0.7" fill="currentColor" stroke="none"/>
   </symbol>
@@ -205,17 +203,42 @@
   <div class="login-box">
     <div class="login-logo"><svg width="32" height="32"><use href="#safe-icon"/></svg></div>
     <div class="login-title">EasySafe</div>
+
+    <!-- Step 1: Email entry -->
     <div id="loginStep1">
-      <div class="login-sub">Enter your email and we'll send you a 6-digit code to sign in.</div>
-      <input class="login-input" id="loginEmail" type="email" placeholder="Enter your email address" onkeydown="if(event.key==='Enter')sendCode()">
-      <button class="login-btn" id="sendCodeBtn" onclick="sendCode()">Send Code</button>
+      <div class="login-sub">Enter your email to sign in or create an account.</div>
+      <input class="login-input" id="loginEmail" type="email" placeholder="Enter your email address" onkeydown="if(event.key==='Enter')handleEmail()">
+      <button class="login-btn" id="emailBtn" onclick="handleEmail()">Continue</button>
     </div>
-    <div id="loginStep2" style="display:none">
-      <div class="login-sub" id="otpMessage">Enter the 6-digit code we sent to your email.</div>
-      <input class="otp-input" id="otpInput" type="text" maxlength="6" placeholder="000000" oninput="this.value=this.value.replace(/\D/g,'')" onkeydown="if(event.key==='Enter')verifyCode()">
-      <button class="login-btn" id="verifyBtn" onclick="verifyCode()">Sign In</button>
+
+    <!-- Step 2: Password login (returning user) -->
+    <div id="loginStepPassword" style="display:none">
+      <div class="login-sub" id="pwMessage">Welcome back! Enter your password.</div>
+      <input class="login-input" id="loginPassword" type="password" placeholder="Enter your password" onkeydown="if(event.key==='Enter')handlePasswordLogin()">
+      <button class="login-btn" id="pwLoginBtn" onclick="handlePasswordLogin()">Sign In</button>
+      <button class="login-link" onclick="forgotPassword()">Forgot password?</button>
+      <br>
       <button class="login-back" onclick="backToEmail()">← Use a different email</button>
     </div>
+
+    <!-- Step 3: OTP verification (new user or forgot password) -->
+    <div id="loginStepOtp" style="display:none">
+      <div class="login-sub" id="otpMessage">Enter the 6-digit code we sent to your email.</div>
+      <input class="otp-input" id="otpInput" type="text" maxlength="6" placeholder="000000" oninput="this.value=this.value.replace(/\D/g,'')" onkeydown="if(event.key==='Enter')verifyCode()">
+      <button class="login-btn" id="verifyBtn" onclick="verifyCode()">Verify Code</button>
+      <button class="login-back" onclick="backToEmail()">← Use a different email</button>
+    </div>
+
+    <!-- Step 4: Set password (after first OTP sign-in) -->
+    <div id="loginStepSetPw" style="display:none">
+      <div class="login-sub" id="setPwMessage">Create a password so you can sign in instantly next time.</div>
+      <input class="login-input" id="newPassword" type="password" placeholder="Create a password" oninput="checkPwMatch()" onkeydown="if(event.key==='Enter')document.getElementById('confirmPassword').focus()">
+      <input class="login-input" id="confirmPassword" type="password" placeholder="Confirm password" oninput="checkPwMatch()" onkeydown="if(event.key==='Enter')handleSetPassword()">
+      <div class="pw-requirements">At least 8 characters</div>
+      <button class="login-btn" id="setPwBtn" onclick="handleSetPassword()">Set Password</button>
+      <button class="login-skip" onclick="skipSetPassword()">Skip for now</button>
+    </div>
+
     <div class="login-status" id="loginStatus"></div>
   </div>
 </div>
@@ -256,16 +279,176 @@ const SAFE_ICON_SM='<svg width="48" height="48" viewBox="0 0 24 24" fill="none" 
 
 let firearms=[],currentUser=null,editId=null,deleteTargetId=null,selectedId=null;
 let filterCat="All",sortF="make",sortD="asc";
-let formPhotos=[],pendingEmail="";
+let formPhotos=[],pendingEmail="",authMode="";
+// authMode: "new" = new user via OTP, "forgot" = forgot password via OTP
 function gid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
 
-async function sendCode(){const email=document.getElementById("loginEmail").value.trim();if(!email){setLoginStatus("Please enter your email.","error");return}const btn=document.getElementById("sendCodeBtn");btn.disabled=true;btn.textContent="Sending...";setLoginStatus("");const{error}=await sb.auth.signInWithOtp({email});btn.disabled=false;btn.textContent="Send Code";if(error){setLoginStatus(error.message,"error");return}pendingEmail=email;document.getElementById("loginStep1").style.display="none";document.getElementById("loginStep2").style.display="";document.getElementById("otpMessage").textContent=`Enter the 6-digit code we sent to ${email}`;document.getElementById("otpInput").value="";document.getElementById("otpInput").focus();setLoginStatus("Code sent! Check your email.","success")}
-async function verifyCode(){const code=document.getElementById("otpInput").value.trim();if(code.length!==6){setLoginStatus("Please enter the 6-digit code.","error");return}const btn=document.getElementById("verifyBtn");btn.disabled=true;btn.textContent="Verifying...";setLoginStatus("");const{data,error}=await sb.auth.verifyOtp({email:pendingEmail,token:code,type:"email"});btn.disabled=false;btn.textContent="Sign In";if(error){setLoginStatus(error.message,"error");return}if(data.session) await onAuth(data.session)}
-function backToEmail(){document.getElementById("loginStep1").style.display="";document.getElementById("loginStep2").style.display="none";setLoginStatus("")}
+// ─── Helpers to show/hide login steps ───
+function showLoginStep(step){
+  ["loginStep1","loginStepPassword","loginStepOtp","loginStepSetPw"].forEach(id=>{
+    document.getElementById(id).style.display="none";
+  });
+  document.getElementById(step).style.display="";
+  setLoginStatus("");
+}
 function setLoginStatus(msg,type=""){const el=document.getElementById("loginStatus");el.textContent=msg;el.className="login-status "+(type||"")}
-async function signOut(){await sb.auth.signOut();currentUser=null;firearms=[];document.getElementById("appShell").style.display="none";document.getElementById("loginScreen").style.display="flex";document.getElementById("loginStep1").style.display="";document.getElementById("loginStep2").style.display="none";document.getElementById("loginEmail").value="";setLoginStatus("")}
-async function onAuth(session){if(!session){document.getElementById("loginScreen").style.display="flex";document.getElementById("appShell").style.display="none";return}currentUser=session.user;document.getElementById("loginScreen").style.display="none";document.getElementById("appShell").style.display="";document.getElementById("userEmail").textContent=currentUser.email;await loadFirearms()}
 
+// ─── Step 1: Email entry → try password first, fall back to OTP ───
+async function handleEmail(){
+  const email=document.getElementById("loginEmail").value.trim();
+  if(!email){setLoginStatus("Please enter your email.","error");return}
+  const btn=document.getElementById("emailBtn");
+  btn.disabled=true;btn.textContent="Checking...";setLoginStatus("");
+  pendingEmail=email;
+
+  // Try signing in with a dummy password to see if the user has a password set.
+  // If we get "Invalid login credentials" → user exists with a password → show password step.
+  // If we get "Email not confirmed" or the user doesn't exist → send OTP for new user.
+  // We use a random impossible password to probe.
+  const{error}=await sb.auth.signInWithPassword({email,password:"__probe__"+Math.random()});
+  btn.disabled=false;btn.textContent="Continue";
+
+  if(error){
+    const msg=error.message.toLowerCase();
+    // "invalid login credentials" means user exists (with or without password)
+    // We can't distinguish "has password" vs "no password" perfectly via probe.
+    // Strategy: always show password field for returning users. If they don't have one,
+    // they'll use "forgot password" which sends OTP. For truly new users, Supabase
+    // returns a different error or we just send OTP.
+    if(msg.includes("invalid login credentials")){
+      // User exists — show password login
+      document.getElementById("pwMessage").textContent=`Welcome back! Enter your password for ${email}`;
+      showLoginStep("loginStepPassword");
+      document.getElementById("loginPassword").value="";
+      document.getElementById("loginPassword").focus();
+      return;
+    }
+  }
+
+  // User likely doesn't exist or some other case — send OTP for new account
+  await sendOtpCode(email,"new");
+}
+
+// ─── Send OTP code ───
+async function sendOtpCode(email,mode){
+  authMode=mode;
+  setLoginStatus("");
+  const{error}=await sb.auth.signInWithOtp({email});
+  if(error){setLoginStatus(error.message,"error");return}
+  document.getElementById("otpMessage").textContent=`Enter the 6-digit code we sent to ${email}`;
+  showLoginStep("loginStepOtp");
+  document.getElementById("otpInput").value="";
+  document.getElementById("otpInput").focus();
+  setLoginStatus("Code sent! Check your email.","success");
+}
+
+// ─── Step 2: Password login ───
+async function handlePasswordLogin(){
+  const pw=document.getElementById("loginPassword").value;
+  if(!pw){setLoginStatus("Please enter your password.","error");return}
+  const btn=document.getElementById("pwLoginBtn");
+  btn.disabled=true;btn.textContent="Signing in...";setLoginStatus("");
+  const{data,error}=await sb.auth.signInWithPassword({email:pendingEmail,password:pw});
+  btn.disabled=false;btn.textContent="Sign In";
+  if(error){
+    setLoginStatus("Incorrect password. Try again or use \"Forgot password\".","error");
+    return;
+  }
+  if(data.session) await onAuth(data.session);
+}
+
+// ─── Forgot password → sends OTP ───
+async function forgotPassword(){
+  const btn=document.getElementById("pwLoginBtn");
+  btn.disabled=true;
+  setLoginStatus("Sending reset code...");
+  await sendOtpCode(pendingEmail,"forgot");
+  btn.disabled=false;
+}
+
+// ─── Step 3: OTP verification ───
+async function verifyCode(){
+  const code=document.getElementById("otpInput").value.trim();
+  if(code.length!==6){setLoginStatus("Please enter the 6-digit code.","error");return}
+  const btn=document.getElementById("verifyBtn");
+  btn.disabled=true;btn.textContent="Verifying...";setLoginStatus("");
+  const{data,error}=await sb.auth.verifyOtp({email:pendingEmail,token:code,type:"email"});
+  btn.disabled=false;btn.textContent="Verify Code";
+  if(error){setLoginStatus(error.message,"error");return}
+  if(data.session){
+    // OTP verified — prompt user to set/reset a password
+    currentUser=data.session.user;
+    if(authMode==="forgot"){
+      document.getElementById("setPwMessage").textContent="Choose a new password for your account.";
+    } else {
+      document.getElementById("setPwMessage").textContent="Create a password so you can sign in instantly next time.";
+    }
+    showLoginStep("loginStepSetPw");
+    document.getElementById("newPassword").value="";
+    document.getElementById("confirmPassword").value="";
+    document.getElementById("newPassword").focus();
+  }
+}
+
+// ─── Step 4: Set password ───
+function checkPwMatch(){
+  const pw=document.getElementById("newPassword").value;
+  const confirm=document.getElementById("confirmPassword").value;
+  if(confirm&&pw!==confirm){setLoginStatus("Passwords don't match.","error")}
+  else if(pw&&pw.length<8){setLoginStatus("Password must be at least 8 characters.","error")}
+  else{setLoginStatus("")}
+}
+async function handleSetPassword(){
+  const pw=document.getElementById("newPassword").value;
+  const confirm=document.getElementById("confirmPassword").value;
+  if(pw.length<8){setLoginStatus("Password must be at least 8 characters.","error");return}
+  if(pw!==confirm){setLoginStatus("Passwords don't match.","error");return}
+  const btn=document.getElementById("setPwBtn");
+  btn.disabled=true;btn.textContent="Saving...";setLoginStatus("");
+  const{error}=await sb.auth.updateUser({password:pw});
+  btn.disabled=false;btn.textContent="Set Password";
+  if(error){setLoginStatus(error.message,"error");return}
+  toast("Password set! You can use it to sign in next time.");
+  // Now enter the app
+  const{data:{session}}=await sb.auth.getSession();
+  if(session) await onAuth(session);
+}
+async function skipSetPassword(){
+  // Enter the app without setting a password — they'll get OTP again next time
+  const{data:{session}}=await sb.auth.getSession();
+  if(session) await onAuth(session);
+  else toast("Something went wrong. Please try again.");
+}
+
+// ─── Navigation helpers ───
+function backToEmail(){
+  showLoginStep("loginStep1");
+  document.getElementById("loginEmail").focus();
+}
+
+async function signOut(){
+  await sb.auth.signOut();
+  currentUser=null;firearms=[];
+  document.getElementById("appShell").style.display="none";
+  document.getElementById("loginScreen").style.display="flex";
+  showLoginStep("loginStep1");
+  document.getElementById("loginEmail").value="";
+}
+
+async function onAuth(session){
+  if(!session){
+    document.getElementById("loginScreen").style.display="flex";
+    document.getElementById("appShell").style.display="none";
+    return;
+  }
+  currentUser=session.user;
+  document.getElementById("loginScreen").style.display="none";
+  document.getElementById("appShell").style.display="";
+  document.getElementById("userEmail").textContent=currentUser.email;
+  await loadFirearms();
+}
+
+// ─── Data operations ───
 async function loadFirearms(){const{data,error}=await sb.from("firearms").select("*").order("created_at",{ascending:false});if(error){toast("Error loading: "+error.message);firearms=[];return}firearms=data||[];firearms.forEach(f=>{if(!f.photos)f.photos=[]});render()}
 async function saveFirearm(data){data.user_id=currentUser.id;if(editId){const{error}=await sb.from("firearms").update(data).eq("id",editId);if(error){toast("Error saving: "+error.message);return false}toast("Firearm updated.")}else{const{error}=await sb.from("firearms").insert(data);if(error){toast("Error saving: "+error.message);return false}toast("Firearm added to inventory.")}return true}
 async function deleteFirearm(id){const item=firearms.find(f=>f.id===id);if(item&&item.photos&&item.photos.length){const paths=item.photos.map(p=>p.storagePath).filter(Boolean);if(paths.length) await sb.storage.from("firearm-photos").remove(paths)}const{error}=await sb.from("firearms").delete().eq("id",id);if(error){toast("Error deleting: "+error.message);return}firearms=firearms.filter(f=>f.id!==id);toast("Firearm removed.")}
