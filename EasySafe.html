@@ -22,25 +22,20 @@
   body{font-family:'Barlow',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
   ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
   a{color:var(--accent)}
-
   @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   @keyframes slideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
   @keyframes fadeScale{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
   @keyframes spin{to{transform:rotate(360deg)}}
   .fade-up{animation:fadeUp .3s ease both}
-
   #toast{position:fixed;top:20px;right:20px;z-index:9999;background:var(--surface2);color:var(--accent);padding:12px 20px;border-radius:var(--radius);font-size:14px;font-weight:500;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.5);animation:slideIn .25s ease;display:none;max-width:360px}
-
   .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:9998}
   .modal-overlay.active{display:flex}
   .modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;max-width:420px;width:90%;animation:fadeScale .2s ease}
   .modal p{font-size:15px;line-height:1.6;margin-bottom:20px}
   .modal-actions{display:flex;gap:10px;justify-content:flex-end}
-
   .lightbox-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;z-index:9997;cursor:zoom-out}
   .lightbox-overlay.active{display:flex}
   .lightbox-overlay img{max-width:92vw;max-height:90vh;border-radius:6px;box-shadow:0 0 60px rgba(0,0,0,.6);object-fit:contain}
-
   .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
   .login-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:44px;max-width:420px;width:100%;text-align:center;animation:fadeScale .4s ease}
   .login-logo{width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));display:inline-flex;align-items:center;justify-content:center;color:var(--bg);margin-bottom:20px;box-shadow:0 4px 24px rgba(122,158,126,.25)}
@@ -58,3 +53,255 @@
   .login-status.success{color:var(--cond-excellent)}
   .login-toggle{background:none;border:none;color:var(--accent);font-size:13px;cursor:pointer;font-family:inherit;margin-top:14px;text-decoration:underline}
   .login-divider{font-size:12px;color:var(--text-faint);margin:4px 0 16px}
+  header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding:20px 28px;border-bottom:1px solid var(--hover);background:linear-gradient(180deg,rgba(122,158,126,.03) 0%,transparent 100%)}
+  .header-left{display:flex;align-items:center;gap:14px}
+  .logo-mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));display:flex;align-items:center;justify-content:center;color:var(--bg);flex-shrink:0;box-shadow:0 2px 12px rgba(122,158,126,.2)}
+  .header-title{font-size:20px;font-weight:700;color:var(--text-bright);letter-spacing:-.02em}
+  .header-subtitle{font-size:13px;color:var(--text-dim);margin-top:2px}
+  .header-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .user-email{font-size:12px;color:var(--text-faint);margin-right:4px}
+  .btn{display:inline-flex;align-items:center;gap:7px;border:none;border-radius:var(--radius);cursor:pointer;font-family:inherit;font-size:14px;font-weight:500;transition:all .15s;line-height:1}
+  .btn:hover{filter:brightness(1.1)}.btn:active{transform:scale(.97)}
+  .btn-primary{padding:9px 18px;font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:var(--bg)}
+  .btn-ghost{padding:8px 14px;font-size:13px;background:transparent;color:var(--text-dim);border:1px solid var(--border)}
+  .btn-ghost:hover{border-color:var(--text-faint);color:var(--text)}
+  .btn-cancel{padding:9px 20px;background:var(--surface2);color:var(--text-dim);border:1px solid var(--border)}
+  .btn-danger{padding:9px 20px;background:var(--danger);color:#fff;font-weight:600}
+  .btn-danger-ghost{padding:8px 14px;font-size:13px;background:transparent;color:var(--danger);border:1px solid var(--border)}
+  .btn-back{background:none;border:none;color:var(--accent);font-size:14px;cursor:pointer;padding:4px 0;margin-bottom:16px;font-weight:500;font-family:inherit}
+  .btn-back:hover{text-decoration:underline}
+  .toolbar{padding:16px 28px 0;display:flex;flex-direction:column;gap:12px}
+  .search-wrap{position:relative;max-width:480px}
+  .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-faint);pointer-events:none}
+  .search-input{width:100%;padding:10px 32px 10px 38px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border-color .15s}
+  .search-input:focus{border-color:var(--accent-border)}
+  .clear-btn{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-faint);font-size:18px;cursor:pointer}
+  .filters{display:flex;gap:6px;flex-wrap:wrap}
+  .filter-btn{padding:6px 14px;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);font-size:13px;cursor:pointer;font-family:inherit;transition:all .15s}
+  .filter-btn:hover{border-color:var(--text-faint)}
+  .filter-btn.active{background:var(--accent-bg);border-color:var(--accent-border);color:var(--accent);font-weight:600}
+  .stats-bar{display:flex;gap:20px;padding:16px 28px;flex-wrap:wrap}
+  .stat-item{display:flex;align-items:baseline;gap:6px}
+  .stat-count{font-size:22px;font-weight:700;color:var(--text-bright)}
+  .stat-label{font-size:11px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.06em}
+  .table-wrap{padding:0 28px;overflow-x:auto;padding-bottom:60px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  thead th{text-align:left;padding:10px 14px;color:var(--text-faint);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid var(--hover);cursor:pointer;user-select:none;white-space:nowrap}
+  thead th:last-child{text-align:right}
+  thead th:hover{color:var(--text-dim)}
+  tbody tr{cursor:pointer;transition:background .12s}
+  tbody tr:hover{background:var(--hover)}
+  td{padding:12px 14px;border-bottom:1px solid rgba(46,44,40,.5);white-space:nowrap}
+  td:last-child{text-align:right}
+  .serial-cell{font-family:'JetBrains Mono',monospace;font-size:13px;opacity:.65}
+  .model-cell{font-weight:600;color:var(--text-bright)}
+  .type-pill{display:inline-block;padding:3px 10px;background:var(--surface2);border-radius:4px;font-size:12px;font-weight:500;color:var(--text-dim)}
+  .cond-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:middle}
+  .thumb-cell{width:50px}
+  .thumb-cell img{width:38px;height:38px;object-fit:cover;border-radius:5px;border:1px solid var(--border);vertical-align:middle}
+  .thumb-placeholder{width:38px;height:38px;border-radius:5px;background:var(--surface2);border:1px solid var(--border);display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}
+  .thumb-placeholder svg{opacity:.2}
+  .empty-state{text-align:center;padding:80px 20px}
+  .empty-state svg{opacity:.2}
+  .empty-title{font-size:16px;font-weight:600;margin-top:16px;color:var(--text-dim)}
+  .empty-hint{font-size:13px;color:var(--text-faint);margin-top:6px}
+  .form-container{max-width:740px;margin:0 auto;padding:20px 28px 60px}
+  .form-title{font-size:20px;font-weight:700;color:var(--text-bright);margin-bottom:24px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .form-grid .full{grid-column:1/-1}
+  label.field-label{display:block;font-size:11px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+  .field-input,.field-select,.field-textarea{width:100%;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border-color .15s}
+  .field-input:focus,.field-select:focus,.field-textarea:focus{border-color:var(--accent-border)}
+  .field-textarea{resize:vertical;min-height:72px}
+  .field-select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237a7670' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+  .form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:28px}
+  .photo-section{grid-column:1/-1}
+  .photo-drop{border:2px dashed var(--border);border-radius:var(--radius);padding:28px;text-align:center;cursor:pointer;transition:all .2s;background:var(--surface);position:relative;overflow:hidden}
+  .photo-drop:hover,.photo-drop.drag-over{border-color:var(--accent-border);background:var(--accent-bg)}
+  .photo-drop svg{opacity:.3;margin-bottom:8px}
+  .photo-drop-text{font-size:14px;color:var(--text-dim)}
+  .photo-drop-hint{font-size:12px;color:var(--text-faint);margin-top:4px}
+  .photo-drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+  .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:14px}
+  .photo-thumb{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;border:1px solid var(--border);cursor:pointer}
+  .photo-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .photo-thumb:hover img{opacity:.8}
+  .photo-remove{position:absolute;top:4px;right:4px;width:24px;height:24px;background:rgba(0,0,0,.75);border:none;border-radius:50%;color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s}
+  .photo-thumb:hover .photo-remove{opacity:1}
+  .photo-uploading{position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center}
+  .spinner{width:20px;height:20px;border:2px solid var(--border);border-top:2px solid var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+  .detail-container{max-width:700px;margin:0 auto;padding:20px 28px 60px}
+  .detail-card{background:var(--surface);border-radius:var(--radius-lg);padding:28px;border:1px solid var(--border)}
+  .detail-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+  .detail-title{font-size:24px;font-weight:700;color:var(--text-bright);margin:6px 0 0}
+  .detail-actions{display:flex;gap:8px}
+  .category-badge{display:inline-block;padding:3px 10px;background:var(--accent-bg);border:1px solid var(--accent-border);color:var(--accent);border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+  .detail-grid{display:grid;grid-template-columns:1fr 1fr}
+  .detail-row{padding:12px 0;border-bottom:1px solid rgba(46,44,40,.5)}
+  .detail-row-label{font-size:11px;font-weight:600;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+  .detail-row-value{font-size:15px;color:var(--text)}
+  .detail-row-value.mono{font-family:'JetBrains Mono',monospace;font-size:14px}
+  .notes-block{margin-top:20px;padding-top:16px;border-top:1px solid rgba(46,44,40,.5)}
+  .notes-text{font-size:14px;line-height:1.7;color:#9a968e;white-space:pre-wrap}
+  .detail-photos{margin-top:20px;padding-top:16px;border-top:1px solid rgba(46,44,40,.5)}
+  .detail-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:12px}
+  .detail-photo{aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer;border:1px solid var(--border);transition:border-color .15s}
+  .detail-photo:hover{border-color:var(--accent-border)}
+  .detail-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  @media(max-width:640px){
+    header{padding:14px 16px}.toolbar{padding:12px 16px 0}.stats-bar{padding:12px 16px;gap:14px}
+    .table-wrap{padding:0 16px 60px}.form-container,.detail-container{padding:16px 16px 60px}
+    .form-grid{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr}
+    .header-title{font-size:17px}.login-box{padding:28px 22px}
+  }
+</style>
+</head>
+<body>
+<div id="toast"></div>
+<div class="modal-overlay" id="deleteModal"><div class="modal"><p>Permanently remove this firearm and its photos from your inventory?</p><div class="modal-actions"><button class="btn btn-cancel" onclick="closeDeleteModal()">Cancel</button><button class="btn btn-danger" onclick="confirmDelete()">Delete</button></div></div></div>
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()"><img id="lightboxImg" src="" alt=""></div>
+<svg style="display:none">
+  <symbol id="safe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <rect x="2" y="2" width="20" height="20" rx="2" stroke-width="1.8"/>
+    <rect x="5" y="5" width="14" height="14" rx="1" stroke-width="1.2"/>
+    <circle cx="12" cy="12" r="3.5" stroke-width="1.4"/>
+    <line x1="12" y1="8.5" x2="12" y2="9.5" stroke-width="1.2"/>
+    <line x1="12" y1="14.5" x2="12" y2="15.5" stroke-width="1.2"/>
+    <line x1="8.5" y1="12" x2="9.5" y2="12" stroke-width="1.2"/>
+    <line x1="14.5" y1="12" x2="15.5" y2="12" stroke-width="1.2"/>
+    <line x1="18" y1="10" x2="18" y2="14" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="3.5" cy="7" r="0.7" fill="currentColor" stroke="none"/>
+    <circle cx="3.5" cy="17" r="0.7" fill="currentColor" stroke="none"/>
+  </symbol>
+</svg>
+<div id="loginScreen" class="login-screen">
+  <div class="login-box">
+    <div class="login-logo"><svg width="32" height="32"><use href="#safe-icon"/></svg></div>
+    <div class="login-title">EasySafe</div>
+    <div id="loginStep1">
+      <div class="login-sub">Sign in to your inventory.</div>
+      <input class="login-input" id="loginEmail" type="email" placeholder="Email address" onkeydown="if(event.key==='Enter')document.getElementById('loginPassword').focus()">
+      <input class="login-input" id="loginPassword" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doSignIn()">
+      <button class="login-btn" id="signInBtn" onclick="doSignIn()">Sign In</button>
+      <div class="login-divider">— or —</div>
+      <button class="login-toggle" onclick="showCreateAccount()">Create an account</button>
+    </div>
+    <div id="loginStep2" style="display:none">
+      <div class="login-sub">Create your EasySafe account.</div>
+      <input class="login-input" id="regEmail" type="email" placeholder="Email address" onkeydown="if(event.key==='Enter')document.getElementById('regPassword').focus()">
+      <input class="login-input" id="regPassword" type="password" placeholder="Password (min 8 characters)" onkeydown="if(event.key==='Enter')document.getElementById('regPassword2').focus()">
+      <input class="login-input" id="regPassword2" type="password" placeholder="Confirm password" onkeydown="if(event.key==='Enter')doSignUp()">
+      <button class="login-btn" id="signUpBtn" onclick="doSignUp()">Create Account</button>
+      <div class="login-divider">— or —</div>
+      <button class="login-toggle" onclick="showSignIn()">Already have an account? Sign in</button>
+    </div>
+    <div class="login-status" id="loginStatus"></div>
+  </div>
+</div>
+<div id="appShell" style="display:none">
+  <header>
+    <div class="header-left">
+      <div class="logo-mark"><svg width="24" height="24"><use href="#safe-icon"/></svg></div>
+      <div><div class="header-title">EasySafe</div><div class="header-subtitle" id="headerSub">Loading...</div></div>
+    </div>
+    <div class="header-actions">
+      <span class="user-email" id="userEmail"></span>
+      <button class="btn btn-ghost" onclick="signOut()">Sign Out</button>
+      <button class="btn btn-primary" onclick="showForm()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Firearm</button>
+    </div>
+  </header>
+  <div id="listView">
+    <div class="toolbar">
+      <div class="search-wrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input class="search-input" id="searchInput" placeholder="Search make, model, serial, caliber..." oninput="renderList()"><button class="clear-btn" id="clearBtn" onclick="clearSearch()" style="display:none">×</button></div>
+      <div class="filters" id="filters"></div>
+    </div>
+    <div class="stats-bar" id="statsBar"></div>
+    <div class="table-wrap" id="tableWrap"></div>
+  </div>
+  <div id="formView" style="display:none"></div>
+  <div id="detailView" style="display:none"></div>
+</div>
+<script>
+const SUPABASE_URL='https://cngrtzoyncmxfcakesio.supabase.co';
+const SUPABASE_KEY='sb_publishable_nwCsqQ46vrd3HElgzNoP5Q_qPVHB49d';
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const CATS=["Handgun","Rifle","Shotgun","Other"];
+const CONDS=["New","Excellent","Good","Fair","Poor"];
+const CC={New:"var(--cond-new)",Excellent:"var(--cond-excellent)",Good:"var(--cond-good)",Fair:"var(--cond-fair)",Poor:"var(--cond-poor)"};
+const SAFE_ICON_SM='<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><rect x="5" y="5" width="14" height="14" rx="1" stroke-width="1"/><circle cx="12" cy="12" r="3.5" stroke-width="1.2"/><line x1="12" y1="8.5" x2="12" y2="9.5"/><line x1="12" y1="14.5" x2="12" y2="15.5"/><line x1="8.5" y1="12" x2="9.5" y2="12"/><line x1="14.5" y1="12" x2="15.5" y2="12"/><line x1="18" y1="10" x2="18" y2="14" stroke-width="1.6" stroke-linecap="round"/></svg>';
+let firearms=[],currentUser=null,editId=null,deleteTargetId=null,selectedId=null;
+let filterCat="All",sortF="make",sortD="asc";
+let formPhotos=[];
+function gid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
+function setLoginStatus(msg,type=""){const el=document.getElementById("loginStatus");el.textContent=msg;el.className="login-status "+(type||"")}
+function showSignIn(){document.getElementById("loginStep1").style.display="";document.getElementById("loginStep2").style.display="none";setLoginStatus("")}
+function showCreateAccount(){document.getElementById("loginStep1").style.display="none";document.getElementById("loginStep2").style.display="";setLoginStatus("");setTimeout(()=>document.getElementById("regEmail").focus(),50)}
+async function doSignIn(){const email=document.getElementById("loginEmail").value.trim(),pass=document.getElementById("loginPassword").value;if(!email||!pass){setLoginStatus("Please enter your email and password.","error");return}const btn=document.getElementById("signInBtn");btn.disabled=true;btn.textContent="Signing in...";setLoginStatus("");const{data,error}=await sb.auth.signInWithPassword({email,password:pass});btn.disabled=false;btn.textContent="Sign In";if(error){setLoginStatus(error.message,"error");return}if(data.session) await onAuth(data.session)}
+async function doSignUp(){const email=document.getElementById("regEmail").value.trim(),pass=document.getElementById("regPassword").value,pass2=document.getElementById("regPassword2").value;if(!email||!pass){setLoginStatus("Please fill in all fields.","error");return}if(pass.length<8){setLoginStatus("Password must be at least 8 characters.","error");return}if(pass!==pass2){setLoginStatus("Passwords do not match.","error");return}const btn=document.getElementById("signUpBtn");btn.disabled=true;btn.textContent="Creating account...";setLoginStatus("");const{data,error}=await sb.auth.signUp({email,password:pass});btn.disabled=false;btn.textContent="Create Account";if(error){setLoginStatus(error.message,"error");return}if(data.session){await onAuth(data.session)}else{setLoginStatus("Account created! Check your email to confirm, then sign in.","success");showSignIn()}}
+async function signOut(){await sb.auth.signOut();currentUser=null;firearms=[];document.getElementById("appShell").style.display="none";document.getElementById("loginScreen").style.display="flex";showSignIn();document.getElementById("loginEmail").value="";document.getElementById("loginPassword").value="";setLoginStatus("")}
+async function onAuth(session){if(!session){document.getElementById("loginScreen").style.display="flex";document.getElementById("appShell").style.display="none";return}currentUser=session.user;document.getElementById("loginScreen").style.display="none";document.getElementById("appShell").style.display="";document.getElementById("userEmail").textContent=currentUser.email;await loadFirearms()}
+async function loadFirearms(){const{data,error}=await sb.from("firearms").select("*").order("created_at",{ascending:false});if(error){toast("Error loading: "+error.message);firearms=[];return}firearms=data||[];firearms.forEach(f=>{if(!f.photos)f.photos=[]});render()}
+async function saveFirearm(data){data.user_id=currentUser.id;if(editId){const{error}=await sb.from("firearms").update(data).eq("id",editId);if(error){toast("Error saving: "+error.message);return false}toast("Firearm updated.")}else{const{error}=await sb.from("firearms").insert(data);if(error){toast("Error saving: "+error.message);return false}toast("Firearm added to inventory.")}return true}
+async function deleteFirearm(id){const item=firearms.find(f=>f.id===id);if(item&&item.photos&&item.photos.length){const paths=item.photos.map(p=>p.storagePath).filter(Boolean);if(paths.length) await sb.storage.from("firearm-photos").remove(paths)}const{error}=await sb.from("firearms").delete().eq("id",id);if(error){toast("Error deleting: "+error.message);return}firearms=firearms.filter(f=>f.id!==id);toast("Firearm removed.")}
+async function uploadPhoto(file){return new Promise((resolve)=>{if(!file.type.startsWith("image/")){resolve(null);return}if(file.size>15*1024*1024){toast("Image too large (max 15MB)");resolve(null);return}const reader=new FileReader();reader.onload=async(e)=>{const img=new Image();img.onload=async()=>{const MAX=1400;let w=img.width,h=img.height;if(w>MAX||h>MAX){if(w>h){h=Math.round(h*MAX/w);w=MAX}else{w=Math.round(w*MAX/h);h=MAX}}const canvas=document.createElement("canvas");canvas.width=w;canvas.height=h;canvas.getContext("2d").drawImage(img,0,0,w,h);canvas.toBlob(async(blob)=>{const photoId=gid();const path=`${currentUser.id}/${photoId}.jpg`;const{error}=await sb.storage.from("firearm-photos").upload(path,blob,{contentType:"image/jpeg"});if(error){toast("Photo upload failed: "+error.message);resolve(null);return}const{data:signedData}=await sb.storage.from("firearm-photos").createSignedUrl(path,60*60*24*365*10);const url=signedData?.signedUrl||"";resolve({id:photoId,url,storagePath:path})},"image/jpeg",0.82)};img.src=e.target.result};reader.readAsDataURL(file)})}
+async function handlePhotoFiles(files){for(const file of Array.from(files)){const tempId="temp_"+gid();formPhotos.push({id:tempId,url:"",storagePath:"",uploading:true});renderPhotoGrid();const result=await uploadPhoto(file);formPhotos=formPhotos.filter(p=>p.id!==tempId);if(result) formPhotos.push(result);renderPhotoGrid()}}
+function removeFormPhoto(pid){const photo=formPhotos.find(p=>p.id===pid);if(photo&&photo.storagePath) sb.storage.from("firearm-photos").remove([photo.storagePath]);formPhotos=formPhotos.filter(p=>p.id!==pid);renderPhotoGrid()}
+function renderPhotoGrid(){const g=document.getElementById("photoGrid");if(!g)return;if(!formPhotos.length){g.innerHTML="";return}g.innerHTML=formPhotos.map(p=>{if(p.uploading) return `<div class="photo-thumb"><div class="photo-uploading"><div class="spinner"></div></div></div>`;return `<div class="photo-thumb"><img src="${esc(p.url)}" onclick="openLightbox('${esc(p.url)}')" alt=""><button class="photo-remove" onclick="event.stopPropagation();removeFormPhoto('${p.id}')">×</button></div>`}).join("")}
+function toast(m){const e=document.getElementById("toast");e.textContent=m;e.style.display="block";setTimeout(()=>e.style.display="none",3000)}
+function openDeleteModal(id){deleteTargetId=id;document.getElementById("deleteModal").classList.add("active")}
+function closeDeleteModal(){deleteTargetId=null;document.getElementById("deleteModal").classList.remove("active")}
+async function confirmDelete(){if(!deleteTargetId)return;await deleteFirearm(deleteTargetId);closeDeleteModal();if(selectedId===deleteTargetId){selectedId=null;showList()}else render()}
+function openLightbox(src){document.getElementById("lightboxImg").src=src;document.getElementById("lightbox").classList.add("active")}
+function closeLightbox(){document.getElementById("lightbox").classList.remove("active")}
+function showList(){editId=null;formPhotos=[];document.getElementById("listView").style.display="";document.getElementById("formView").style.display="none";document.getElementById("detailView").style.display="none";render()}
+function showForm(id){editId=id||null;if(editId){const it=firearms.find(f=>f.id===editId);formPhotos=it&&it.photos?it.photos.map(p=>({...p})):[];}else formPhotos=[];document.getElementById("listView").style.display="none";document.getElementById("formView").style.display="";document.getElementById("detailView").style.display="none";renderForm()}
+function showDetail(id){selectedId=id;document.getElementById("listView").style.display="none";document.getElementById("formView").style.display="none";document.getElementById("detailView").style.display="";renderDetail()}
+function clearSearch(){document.getElementById("searchInput").value="";renderList()}
+function renderHeader(){const t=firearms.reduce((s,f)=>s+(parseFloat(f.price)||0),0);document.getElementById("headerSub").textContent=`${firearms.length} item${firearms.length!==1?"s":""} · $${t.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} total value`}
+function renderFilters(){document.getElementById("filters").innerHTML=["All",...CATS].map(c=>`<button class="filter-btn ${filterCat===c?'active':''}" onclick="filterCat='${c}';renderFilters();renderList()">${c}</button>`).join("")}
+function renderStats(){document.getElementById("statsBar").innerHTML=CATS.map(c=>{const n=firearms.filter(f=>f.category===c).length;return `<div class="stat-item"><span class="stat-count">${n}</span><span class="stat-label">${c}${n!==1?"s":""}</span></div>`}).join("")}
+function renderList(){
+  const s=(document.getElementById("searchInput").value||"").toLowerCase();
+  document.getElementById("clearBtn").style.display=s?"":"none";
+  let list=firearms.filter(f=>filterCat==="All"||f.category===filterCat).filter(f=>{if(!s)return true;return[f.make,f.model,f.serial,f.caliber,f.notes,f.location].some(v=>(v||"").toLowerCase().includes(s))}).sort((a,b)=>{if(sortF==="price"){const av=parseFloat(a.price)||0,bv=parseFloat(b.price)||0;return sortD==="asc"?av-bv:bv-av}const av=(a[sortF]||"").toString().toLowerCase(),bv=(b[sortF]||"").toString().toLowerCase();return sortD==="asc"?av.localeCompare(bv):bv.localeCompare(av)});
+  const w=document.getElementById("tableWrap");
+  if(!list.length){w.innerHTML=`<div class="empty-state fade-up">${SAFE_ICON_SM}<p class="empty-title">${firearms.length===0?"Your safe is empty":"No results match your search"}</p><p class="empty-hint">${firearms.length===0?'Click "Add Firearm" to get started.':"Try adjusting your search or filters."}</p></div>`;return}
+  const si=k=>sortF===k?(sortD==="asc"?" ↑":" ↓"):"";
+  w.innerHTML=`<table><thead><tr><th style="width:50px"></th><th onclick="toggleSort('make')">Make${si("make")}</th><th onclick="toggleSort('model')">Model${si("model")}</th><th onclick="toggleSort('serial')">Serial #${si("serial")}</th><th onclick="toggleSort('caliber')">Caliber${si("caliber")}</th><th onclick="toggleSort('category')">Type${si("category")}</th><th onclick="toggleSort('condition')">Condition${si("condition")}</th><th onclick="toggleSort('price')">Value${si("price")}</th></tr></thead><tbody>${list.map(f=>{const hp=f.photos&&f.photos.length>0;const th=hp?`<img src="${esc(f.photos[0].url)}" alt="">`:`<span class="thumb-placeholder"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>`;return `<tr onclick="showDetail('${f.id}')"><td class="thumb-cell">${th}</td><td>${esc(f.make)}</td><td class="model-cell">${esc(f.model)}</td><td class="serial-cell">${f.serial?esc(f.serial):"—"}</td><td>${f.caliber?esc(f.caliber):"—"}</td><td><span class="type-pill">${esc(f.category)}</span></td><td><span class="cond-dot" style="background:${CC[f.condition]||'#888'}"></span>${esc(f.condition)}</td><td>${f.price?"$"+parseFloat(f.price).toLocaleString():"—"}</td></tr>`}).join("")}</tbody></table>`;
+}
+function toggleSort(f){if(sortF===f)sortD=sortD==="asc"?"desc":"asc";else{sortF=f;sortD="asc"}renderList()}
+function renderForm(){
+  const it=editId?firearms.find(f=>f.id===editId):null;
+  const d=it||{make:"",model:"",serial:"",caliber:"",category:"Handgun",condition:"Good",acquired:"",price:"",notes:"",location:"",barrel_length:"",capacity:""};
+  document.getElementById("formView").innerHTML=`<div class="form-container fade-up"><button class="btn-back" onclick="${editId&&selectedId?`showDetail('${selectedId}')`:'showList()'}">← Back</button><div class="form-title">${editId?"Edit Firearm":"Add New Firearm"}</div><div class="form-grid">${mf("Make *","make",d.make,"e.g. Smith & Wesson")}${mf("Model *","model",d.model,"e.g. M&P Shield")}${mf("Serial Number","serial",d.serial,"e.g. ABC12345")}${mf("Caliber / Gauge","caliber",d.caliber,"e.g. 9mm, .308, 12ga")}${ms("Category","category",CATS,d.category)}${ms("Condition","condition",CONDS,d.condition)}${mf("Barrel Length","barrel_length",d.barrel_length,'e.g. 16"')}${mf("Capacity","capacity",d.capacity,"e.g. 15+1")}${mf("Acquisition Date","acquired",d.acquired,"","date")}${mf("Value / Price Paid ($)","price",d.price,"0.00","number")}${mf("Storage Location","location",d.location,"e.g. Safe #1, Shelf A","text",true)}<div class="full"><label class="field-label">Notes</label><textarea class="field-textarea" id="f_notes" placeholder="Modifications, accessories, purchase details...">${esc(d.notes)}</textarea></div><div class="photo-section"><label class="field-label">Photos</label><div class="photo-drop" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="event.preventDefault();this.classList.remove('drag-over');handlePhotoFiles(event.dataTransfer.files)"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><div class="photo-drop-text">Drop photos here or click to browse</div><div class="photo-drop-hint">JPEG, PNG up to 15 MB · Auto-resized for storage</div><input type="file" accept="image/*" multiple onchange="handlePhotoFiles(this.files);this.value=''"></div><div class="photo-grid" id="photoGrid"></div></div></div><div class="form-actions"><button class="btn btn-cancel" onclick="${editId&&selectedId?`showDetail('${selectedId}')`:'showList()'}">Cancel</button><button class="btn btn-primary" id="submitBtn" onclick="submitForm()">${editId?"Save Changes":"Add to Inventory"}</button></div></div>`;
+  renderPhotoGrid();
+}
+function mf(l,id,v,ph,t="text",full=false){return `<div${full?' class="full"':''}><label class="field-label">${l}</label><input class="field-input" id="f_${id}" type="${t}" value="${esc(v)}" placeholder="${ph}"></div>`}
+function ms(l,id,opts,sel){return `<div><label class="field-label">${l}</label><select class="field-select" id="f_${id}">${opts.map(o=>`<option value="${o}"${o===sel?" selected":""}>${o}</option>`).join("")}</select></div>`}
+async function submitForm(){
+  const make=document.getElementById("f_make").value.trim(),model=document.getElementById("f_model").value.trim();
+  if(!make||!model){toast("Make and Model are required.");return}
+  const btn=document.getElementById("submitBtn");btn.disabled=true;btn.textContent="Saving...";
+  const data={make,model,serial:document.getElementById("f_serial").value.trim(),caliber:document.getElementById("f_caliber").value.trim(),category:document.getElementById("f_category").value,condition:document.getElementById("f_condition").value,barrel_length:document.getElementById("f_barrel_length").value.trim(),capacity:document.getElementById("f_capacity").value.trim(),acquired:document.getElementById("f_acquired").value,price:document.getElementById("f_price").value,location:document.getElementById("f_location").value.trim(),notes:document.getElementById("f_notes").value,photos:formPhotos.filter(p=>!p.uploading).map(p=>({id:p.id,url:p.url,storagePath:p.storagePath}))};
+  const ok=await saveFirearm(data);btn.disabled=false;btn.textContent=editId?"Save Changes":"Add to Inventory";
+  if(ok){formPhotos=[];await loadFirearms();showList()}
+}
+function renderDetail(){
+  const f=firearms.find(i=>i.id===selectedId);if(!f){showList();return}
+  const rows=[["Serial Number",f.serial,true],["Caliber / Gauge",f.caliber],["Condition",f.condition],["Barrel Length",f.barrel_length],["Capacity",f.capacity],["Acquired",f.acquired],["Value",f.price?`$${parseFloat(f.price).toLocaleString(undefined,{minimumFractionDigits:2})}`:""],["Location",f.location]].filter(r=>r[1]).map(r=>`<div class="detail-row"><div class="detail-row-label">${r[0]}</div><div class="detail-row-value${r[2]?' mono':''}">${esc(r[1])}</div></div>`).join("");
+  const ph=f.photos&&f.photos.length?`<div class="detail-photos"><label class="field-label">Photos (${f.photos.length})</label><div class="detail-photo-grid">${f.photos.map(p=>`<div class="detail-photo" onclick="openLightbox('${esc(p.url)}')"><img src="${esc(p.url)}" alt=""></div>`).join("")}</div></div>`:"";
+  document.getElementById("detailView").innerHTML=`<div class="detail-container fade-up"><button class="btn-back" onclick="showList()">← Back to List</button><div class="detail-card"><div class="detail-header"><div><span class="category-badge">${esc(f.category)}</span><div class="detail-title">${esc(f.make)} ${esc(f.model)}</div></div><div class="detail-actions"><button class="btn btn-ghost" onclick="showForm('${f.id}')">Edit</button><button class="btn btn-danger-ghost" onclick="openDeleteModal('${f.id}')">Delete</button></div></div><div class="detail-grid">${rows}</div>${f.notes?`<div class="notes-block"><label class="field-label">Notes</label><p class="notes-text">${esc(f.notes)}</p></div>`:"}${ph}</div></div>`;
+}
+function esc(s){if(!s)return"";const d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function render(){renderHeader();renderFilters();renderStats();renderList()}
+(async()=>{
+  const{data:{session}}=await sb.auth.getSession();
+  if(session) await onAuth(session);
+  sb.auth.onAuthStateChange(async(event,session)=>{
+    if(event==='SIGNED_IN'&&session) await onAuth(session);
+    if(event==='SIGNED_OUT') onAuth(null);
+  });
+})();
+</script>
+</body>
+</html>
