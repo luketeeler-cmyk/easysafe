@@ -20,6 +20,7 @@ function isDropdown(item: TabItem): item is DropdownTab {
 }
 
 const TABS: TabItem[] = [
+  { label: 'Dashboard', to: '/' },
   { label: 'Ammunition', to: '/ammunition' },
   {
     label: 'NFA',
@@ -135,7 +136,7 @@ const CategoryNav: React.FC = () => {
             <NavLink
               key={tab.to}
               to={tab.to}
-              end={tab.to === '/ammunition' || tab.to === '/trust-documents'}
+              end={tab.to === '/' || tab.to === '/ammunition' || tab.to === '/trust-documents'}
               className={({ isActive }) =>
                 `${styles.tab} ${isActive ? styles.active : ''}`
               }

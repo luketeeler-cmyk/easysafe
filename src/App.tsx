@@ -1,8 +1,9 @@
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import { ToastProvider } from './components/ui/Toast'
 import { AuthGate } from './components/auth/AuthGate'
 import { Layout } from './components/layout/Layout'
 
+import { Dashboard } from './pages/dashboard/Dashboard'
 import { AmmunitionList } from './pages/ammunition/AmmunitionList'
 import { AmmunitionForm } from './pages/ammunition/AmmunitionForm'
 import { AmmunitionDetail } from './pages/ammunition/AmmunitionDetail'
@@ -22,7 +23,7 @@ export default function App() {
         <AuthGate>
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/" element={<Navigate to="/firearms?category=handgun" replace />} />
+              <Route path="/" element={<Dashboard />} />
               <Route path="/ammunition" element={<AmmunitionList />} />
               <Route path="/ammunition/new" element={<AmmunitionForm />} />
               <Route path="/ammunition/:id" element={<AmmunitionDetail />} />
