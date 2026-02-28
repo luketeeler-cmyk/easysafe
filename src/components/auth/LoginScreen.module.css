@@ -1,0 +1,60 @@
+/* ------------------------------------------------------------------ */
+/*  LoginScreen                                                        */
+/* ------------------------------------------------------------------ */
+
+.backdrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 1.5rem;
+  background-color: var(--bg);
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 2.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeScale 0.3s ease-out both;
+}
+
+/* ---- Safe icon wrapper ------------------------------------------- */
+.iconWrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--od-light), var(--od-dark));
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+/* ---- Title / subtitle -------------------------------------------- */
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 0.15rem;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  margin-bottom: 1.75rem;
+}
+
+/* ---- Responsive -------------------------------------------------- */
+@media (max-width: 480px) {
+  .card {
+    padding: 2rem 1.25rem 1.5rem;
+  }
+}

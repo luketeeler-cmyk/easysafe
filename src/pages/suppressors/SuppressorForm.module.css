@@ -1,0 +1,82 @@
+/* ------------------------------------------------------------------ */
+/*  SuppressorForm                                                     */
+/* ------------------------------------------------------------------ */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin: 0;
+}
+
+/* ---- Scrape row ------------------------------------------------- */
+
+.scrapeRow {
+  margin-bottom: 8px;
+}
+
+/* ---- Grid layout ------------------------------------------------ */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.fullRow {
+  margin-top: 8px;
+}
+
+.sectionLabel {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ---- Actions ---------------------------------------------------- */
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* ---- Loading ---------------------------------------------------- */
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 260px;
+}
+
+/* ---- Responsive ------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .page {
+    padding: 16px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+}

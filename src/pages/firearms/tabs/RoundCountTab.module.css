@@ -1,0 +1,80 @@
+.container { padding: 8px 0; }
+.totalBox {
+  text-align: center;
+  padding: 20px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 20px;
+}
+.totalLabel {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.totalValue {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--od);
+  font-family: var(--font-mono);
+}
+.addBtn { margin-bottom: 16px; }
+.form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+@media (max-width: 640px) {
+  .formRow { grid-template-columns: 1fr; }
+}
+.formActions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.entryInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.entryCount {
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--od);
+  font-size: 15px;
+  min-width: 80px;
+}
+.entryDate {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.entryNotes {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
+}

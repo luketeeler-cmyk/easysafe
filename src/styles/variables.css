@@ -1,0 +1,61 @@
+/* ------------------------------------------------------------------ */
+/*  EasySafe Design Tokens                                            */
+/* ------------------------------------------------------------------ */
+
+:root {
+  /* -- Backgrounds ------------------------------------------------- */
+  --bg:          #C5B9A1;
+  --bg-light:    #D4C9B3;
+  --surface:     #D4C9B3;
+  --surface2:    #CCC0AA;
+
+  /* -- Olive Drab (primary UI color) ------------------------------- */
+  --od:          #4B5320;
+  --od-light:    #5C6630;
+  --od-dark:     #3A4218;
+  --od-faint:    rgba(75, 83, 32, 0.15);
+
+  /* -- Text -------------------------------------------------------- */
+  --text:        #3A3226;
+  --text-dim:    #6B6052;
+  --text-faint:  #8A7F71;
+  --text-bright: #2A2418;
+
+  /* -- Borders ----------------------------------------------------- */
+  --border:        rgba(75, 83, 32, 0.25);
+  --border-strong: rgba(75, 83, 32, 0.45);
+
+  /* -- Accent (alias for OD) --------------------------------------- */
+  --accent:        #4B5320;
+  --accent-bg:     rgba(75, 83, 32, 0.12);
+  --accent-border: rgba(75, 83, 32, 0.30);
+
+  /* -- Status ------------------------------------------------------ */
+  --danger:  #8B3A2A;
+  --success: #4A6B3A;
+  --warning: #8B6B2A;
+
+  /* -- Condition scale --------------------------------------------- */
+  --cond-new:       #4A7A4A;
+  --cond-excellent: #5A8A3A;
+  --cond-good:      #7A8A2A;
+  --cond-fair:      #8A7A2A;
+  --cond-poor:      #8B3A2A;
+
+  /* -- Radii ------------------------------------------------------- */
+  --radius:    8px;
+  --radius-lg: 12px;
+
+  /* -- Typography -------------------------------------------------- */
+  --font-sans: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+               Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas,
+               'Courier New', monospace;
+
+  /* -- Shadows ----------------------------------------------------- */
+  --shadow:    0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+
+  /* -- Contrast text on accent backgrounds ------------------------- */
+  --text-on-accent: #F5F0E8;
+}

@@ -1,0 +1,17 @@
+.root {
+  min-height: 100vh;
+  background-color: var(--bg);
+}
+
+.main {
+  max-width: 1200px;
+  margin: 104px auto 0;   /* 56px header + 48px nav */
+  padding: 24px;
+  min-height: calc(100vh - 104px);
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding: 16px;
+  }
+}

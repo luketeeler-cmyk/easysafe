@@ -1,0 +1,136 @@
+/* ---- Desktop table ------------------------------------------------- */
+
+.tableWrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 14px;
+}
+
+.th {
+  text-align: left;
+  padding: 10px 14px;
+  background-color: var(--od-faint);
+  color: var(--text-bright);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1.5px solid var(--border-strong);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.th.sortable {
+  cursor: pointer;
+}
+
+.th.sortable:hover {
+  background-color: rgba(75, 83, 32, 0.22);
+}
+
+.arrow {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 10px;
+  vertical-align: middle;
+}
+
+.row {
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.12s ease;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row:hover {
+  background-color: var(--accent-bg);
+}
+
+.row.clickable {
+  cursor: pointer;
+}
+
+.td {
+  padding: 10px 14px;
+  color: var(--text);
+  vertical-align: middle;
+}
+
+/* ---- Empty state --------------------------------------------------- */
+
+.empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-dim);
+  font-family: var(--font-sans);
+  font-size: 14px;
+}
+
+/* ---- Mobile cards (hidden on desktop) ------------------------------ */
+
+.cards {
+  display: none;
+}
+
+/* ---- Responsive switch --------------------------------------------- */
+
+@media (max-width: 767px) {
+  .tableWrap {
+    display: none;
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: background-color 0.12s ease;
+  }
+
+  .card:hover {
+    background-color: var(--accent-bg);
+  }
+
+  .card.clickable {
+    cursor: pointer;
+  }
+
+  .cardField {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .cardLabel {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-dim);
+    flex-shrink: 0;
+  }
+
+  .cardValue {
+    font-size: 14px;
+    color: var(--text);
+    text-align: right;
+  }
+}

@@ -1,0 +1,107 @@
+/* ---- Collapsed trigger -------------------------------------------- */
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--od);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.trigger:hover {
+  color: var(--od-dark);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--od);
+  outline-offset: 2px;
+}
+
+.linkIcon {
+  font-style: normal;
+  font-size: 14px;
+}
+
+/* ---- Expanded container ------------------------------------------- */
+
+.container {
+  border: 1.5px dashed var(--border-strong);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  background: var(--surface);
+}
+
+.hint {
+  margin: 0 0 10px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.inputRow {
+  display: flex;
+  gap: 8px;
+}
+
+.input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.input:focus {
+  border-color: var(--od);
+}
+
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fetchBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 72px;
+  padding: 8px 16px;
+  border: 1.5px solid var(--od);
+  border-radius: var(--radius);
+  background-color: var(--od);
+  color: var(--text-on-accent);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.fetchBtn:hover:not(:disabled) {
+  background-color: var(--od-dark);
+  border-color: var(--od-dark);
+}
+
+.fetchBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.fetchBtn:focus-visible {
+  outline: 2px solid var(--od);
+  outline-offset: 2px;
+}

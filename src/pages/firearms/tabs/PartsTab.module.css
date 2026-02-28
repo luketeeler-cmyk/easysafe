@@ -1,0 +1,33 @@
+.container { padding: 8px 0; }
+.summary { font-size: 14px; color: var(--text-dim); margin-bottom: 16px; }
+.addBtn { margin-bottom: 16px; }
+.form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+@media (max-width: 640px) { .formGrid { grid-template-columns: 1fr; } }
+.formActions { display: flex; gap: 8px; justify-content: flex-end; }
+.list { display: flex; flex-direction: column; gap: 8px; }
+.item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius);
+}
+.itemInfo { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+.itemField { font-size: 14px; }
+.itemLabel { color: var(--text-dim); font-size: 12px; margin-bottom: 2px; }
+.itemActions { display: flex; gap: 6px; flex-shrink: 0; }
+.typeBadge {
+  display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase;
+  background: var(--accent-bg); color: var(--od); padding: 2px 8px;
+  border-radius: 10px; letter-spacing: 0.5px;
+}

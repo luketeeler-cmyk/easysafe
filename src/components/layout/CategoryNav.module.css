@@ -1,0 +1,136 @@
+.nav {
+  position: sticky;
+  top: 56px;           /* below header */
+  z-index: 90;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  height: 48px;
+  font-family: var(--font-sans);
+}
+
+.inner {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.inner::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---- Tab (link or dropdown trigger) ------------------------------- */
+
+.tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 16px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  line-height: 48px;
+}
+
+.tab:hover {
+  color: var(--od);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--od);
+  outline-offset: -2px;
+}
+
+.active {
+  color: var(--od);
+  font-weight: 700;
+}
+
+.active::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 0;
+  height: 3px;
+  background-color: var(--od);
+  border-radius: 3px 3px 0 0;
+}
+
+/* ---- Dropdown caret ----------------------------------------------- */
+
+.caret {
+  font-size: 10px;
+  margin-top: 1px;
+}
+
+/* ---- Dropdown container ------------------------------------------- */
+
+.dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+}
+
+/* ---- Dropdown menu ------------------------------------------------ */
+
+.menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-shadow: var(--shadow);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.menuItem {
+  display: block;
+  padding: 10px 16px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.12s ease;
+  white-space: nowrap;
+}
+
+.menuItem:hover {
+  background-color: var(--accent-bg);
+  color: var(--od);
+}
+
+.menuItemActive {
+  color: var(--od);
+  font-weight: 700;
+  background-color: var(--od-faint);
+}
+
+/* ---- Mobile ------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .inner {
+    padding: 0 12px;
+  }
+
+  .tab {
+    padding: 0 12px;
+    font-size: 13px;
+  }
+}

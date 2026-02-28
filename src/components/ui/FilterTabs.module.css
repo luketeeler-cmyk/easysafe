@@ -1,0 +1,39 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--od);
+  background: transparent;
+  color: var(--od);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  line-height: 1.4;
+}
+
+.pill:hover:not(.active) {
+  background-color: var(--accent-bg);
+}
+
+.pill:focus-visible {
+  outline: 2px solid var(--od);
+  outline-offset: 2px;
+}
+
+.active {
+  background-color: var(--od);
+  color: var(--text-on-accent);
+  border-color: var(--od);
+}

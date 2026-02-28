@@ -1,0 +1,106 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+  position: relative;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--od);
+  outline-offset: 2px;
+}
+
+/* ---- Variants ---- */
+
+.primary {
+  background-color: var(--od);
+  color: var(--text-on-accent);
+  border-color: var(--od);
+}
+
+.primary:hover:not(:disabled) {
+  background-color: var(--od-dark);
+  border-color: var(--od-dark);
+}
+
+.secondary {
+  background-color: transparent;
+  color: var(--od);
+  border-color: var(--od);
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: var(--accent-bg);
+}
+
+.danger {
+  background-color: var(--danger);
+  color: #fff;
+  border-color: var(--danger);
+}
+
+.danger:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--od);
+  border-color: transparent;
+}
+
+.ghost:hover:not(:disabled) {
+  background-color: var(--accent-bg);
+}
+
+/* ---- Sizes ---- */
+
+.sm {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.md {
+  padding: 10px 18px;
+  font-size: 14px;
+}
+
+.lg {
+  padding: 13px 24px;
+  font-size: 15px;
+}
+
+/* ---- Modifiers ---- */
+
+.fullWidth {
+  width: 100%;
+}
+
+.loading {
+  pointer-events: none;
+}
+
+.spinnerWrap {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hiddenLabel {
+  visibility: hidden;
+}

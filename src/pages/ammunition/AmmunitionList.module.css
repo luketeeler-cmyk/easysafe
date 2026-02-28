@@ -1,0 +1,59 @@
+/* ------------------------------------------------------------------ */
+/*  AmmunitionList                                                     */
+/* ------------------------------------------------------------------ */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ---- Header ---------------------------------------------------- */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin: 0;
+}
+
+.addLink {
+  text-decoration: none;
+}
+
+/* ---- Loading / Error ------------------------------------------- */
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 260px;
+}
+
+.error {
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+/* ---- Responsive ------------------------------------------------ */
+
+@media (max-width: 640px) {
+  .page {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+}

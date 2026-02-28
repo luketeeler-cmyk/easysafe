@@ -1,0 +1,142 @@
+/* ------------------------------------------------------------------ */
+/*  FirearmDetail                                                      */
+/* ------------------------------------------------------------------ */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ---- Back link -------------------------------------------------- */
+
+.back {
+  font-size: 0.85rem;
+  color: var(--od);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.back:hover {
+  color: var(--od-dark);
+  text-decoration: underline;
+}
+
+/* ---- Header ----------------------------------------------------- */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin: 0;
+}
+
+.headerActions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ---- Info grid -------------------------------------------------- */
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.infoLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+}
+
+.infoValue {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+}
+
+/* ---- NFA section ------------------------------------------------ */
+
+.nfaSection {
+  border-left: 4px solid var(--od);
+  padding-left: 16px;
+  margin-top: 8px;
+}
+
+.sectionTitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin: 0 0 12px 0;
+}
+
+/* ---- Tab content ------------------------------------------------ */
+
+.tabContent {
+  min-height: 100px;
+}
+
+/* ---- Loading / empty -------------------------------------------- */
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 260px;
+}
+
+/* ---- Modal footer ----------------------------------------------- */
+
+.modalFooter {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* ---- Responsive ------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .page {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+}

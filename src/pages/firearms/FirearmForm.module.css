@@ -1,0 +1,89 @@
+/* ------------------------------------------------------------------ */
+/*  FirearmForm                                                        */
+/* ------------------------------------------------------------------ */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin: 0;
+}
+
+/* ---- 2-column grid --------------------------------------------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+}
+
+/* ---- Inline info field ----------------------------------------- */
+
+.infoField {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 6px;
+}
+
+.infoText {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin: 0;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* ---- Section --------------------------------------------------- */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionTitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin: 0;
+}
+
+/* ---- Actions --------------------------------------------------- */
+
+.actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+/* ---- Loading --------------------------------------------------- */
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 260px;
+}

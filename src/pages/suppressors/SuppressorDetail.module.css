@@ -1,0 +1,42 @@
+.container { max-width: 900px; }
+.loading { display: flex; justify-content: center; padding: 60px; }
+.backLink {
+  display: inline-block;
+  color: var(--od);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+.backLink:hover { text-decoration: underline; }
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+.title { font-size: 24px; font-weight: 700; color: var(--text-bright); margin: 0; }
+.serial { font-family: var(--font-mono); font-size: 14px; color: var(--text-dim); }
+.headerActions { display: flex; gap: 8px; flex-shrink: 0; }
+.photos { margin-bottom: 24px; }
+.tabContent { padding-top: 16px; }
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 640px) { .infoGrid { grid-template-columns: 1fr; } }
+.field {}
+.fieldLabel { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.fieldValue { font-size: 15px; color: var(--text); }
+.caliberList { display: flex; flex-wrap: wrap; gap: 6px; }
+.nfaSection {
+  grid-column: 1 / -1;
+  border-left: 3px solid var(--od);
+  padding-left: 16px;
+  margin-top: 8px;
+}
+.sectionTitle { font-size: 14px; font-weight: 600; color: var(--od); margin-bottom: 12px; }
+.nfaGrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media (max-width: 640px) { .nfaGrid { grid-template-columns: 1fr; } }

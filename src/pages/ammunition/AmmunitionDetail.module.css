@@ -1,0 +1,149 @@
+/* ------------------------------------------------------------------ */
+/*  AmmunitionDetail                                                   */
+/* ------------------------------------------------------------------ */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ---- Back link -------------------------------------------------- */
+
+.back {
+  font-size: 0.85rem;
+  color: var(--od);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s ease;
+}
+
+.back:hover {
+  color: var(--od-light);
+}
+
+/* ---- Header ----------------------------------------------------- */
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--text-dim);
+  margin: 2px 0 0;
+}
+
+.headerActions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ---- Info grid -------------------------------------------------- */
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  border: 1px solid var(--border);
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.infoLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+}
+
+.infoValue {
+  font-size: 1rem;
+  color: var(--text-bright);
+  font-weight: 500;
+}
+
+/* ---- Sections --------------------------------------------------- */
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin: 0 0 12px;
+}
+
+.notesSection {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  border: 1px solid var(--border);
+}
+
+.notesText {
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.photosSection {
+  margin-top: 4px;
+}
+
+/* ---- Modal footer ----------------------------------------------- */
+
+.modalFooter {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* ---- Loading / Error -------------------------------------------- */
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 260px;
+}
+
+/* ---- Responsive ------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .page {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr 1fr;
+    padding: 16px;
+  }
+}

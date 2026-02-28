@@ -1,0 +1,226 @@
+/* ------------------------------------------------------------------ */
+/*  EasySafe Shared Form Styles                                       */
+/* ------------------------------------------------------------------ */
+
+/* -- Form layout --------------------------------------------------- */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+/* -- Form group ---------------------------------------------------- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* -- Labels -------------------------------------------------------- */
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.form-label .required {
+  color: var(--danger);
+  margin-left: 2px;
+}
+
+/* -- Inputs, selects, textareas ------------------------------------ */
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--text-faint);
+}
+
+.form-input:hover,
+.form-select:hover,
+.form-textarea:hover {
+  border-color: var(--border-strong);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--od);
+  box-shadow: 0 0 0 3px var(--od-faint);
+}
+
+/* -- Select -------------------------------------------------------- */
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%234B5320' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 12px;
+  padding-right: 2.25rem;
+  cursor: pointer;
+}
+
+/* -- Textarea ------------------------------------------------------ */
+.form-textarea {
+  min-height: 5rem;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* -- Number inputs (remove spinners) ------------------------------- */
+.form-input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.form-input[type='number']::-webkit-inner-spin-button,
+.form-input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* -- Validation states --------------------------------------------- */
+.form-input.error,
+.form-select.error,
+.form-textarea.error {
+  border-color: var(--danger);
+}
+
+.form-input.error:focus,
+.form-select.error:focus,
+.form-textarea.error:focus {
+  box-shadow: 0 0 0 3px rgba(139, 58, 42, 0.15);
+}
+
+.form-error {
+  font-size: 0.8rem;
+  color: var(--danger);
+  margin-top: 0.2rem;
+}
+
+/* -- Help text ----------------------------------------------------- */
+.form-help {
+  font-size: 0.8rem;
+  color: var(--text-faint);
+  margin-top: 0.15rem;
+}
+
+/* -- Form actions row ---------------------------------------------- */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  margin-top: 1rem;
+}
+
+.form-actions .btn {
+  min-width: 7rem;
+}
+
+/* -- Buttons (form context) ---------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1.5px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+              color 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Primary */
+.btn-primary {
+  background: var(--od);
+  color: var(--text-on-accent);
+  border-color: var(--od);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--od-light);
+  border-color: var(--od-light);
+}
+
+.btn-primary:active:not(:disabled) {
+  background: var(--od-dark);
+  border-color: var(--od-dark);
+}
+
+/* Secondary / outline */
+.btn-secondary {
+  background: transparent;
+  color: var(--od);
+  border-color: var(--border-strong);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--od-faint);
+  border-color: var(--od);
+}
+
+/* Ghost */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-dim);
+  border-color: transparent;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--od-faint);
+  color: var(--text);
+}
+
+/* Danger */
+.btn-danger {
+  background: var(--danger);
+  color: var(--text-on-accent);
+  border-color: var(--danger);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #7A3020;
+  border-color: #7A3020;
+}
+
+/* Small variant */
+.btn-sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.82rem;
+}
