@@ -55,7 +55,7 @@ const CategoryNav: React.FC = () => {
   }, [location]);
 
   const isNfaActive =
-    location.pathname + location.search === '/firearms?category=nfa_firearm' ||
+    (location.pathname === '/firearms' && location.search === '?category=nfa_firearm') ||
     location.pathname === '/suppressors';
 
   return (
@@ -87,6 +87,7 @@ const CategoryNav: React.FC = () => {
                       <NavLink
                         key={child.to}
                         to={child.to}
+                        end
                         className={({ isActive }) =>
                           `${styles.menuItem} ${isActive ? styles.menuItemActive : ''}`
                         }
@@ -104,6 +105,7 @@ const CategoryNav: React.FC = () => {
             <NavLink
               key={tab.to}
               to={tab.to}
+              end={tab.to === '/ammunition' || tab.to === '/trust-documents'}
               className={({ isActive }) =>
                 `${styles.tab} ${isActive ? styles.active : ''}`
               }
