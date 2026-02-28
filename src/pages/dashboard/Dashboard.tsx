@@ -85,10 +85,7 @@ function useGunDealsFeed() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(
-        'https://www.reddit.com/r/gundeals/new.json?limit=20',
-        { headers: { 'Accept': 'application/json' } },
-      );
+      const res = await fetch('/api/gundeals');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
       const items: RedditPost[] = json.data.children.map(
@@ -229,7 +226,7 @@ const Dashboard: React.FC = () => {
       cats[cat] = { value: 0, count: 0 };
     }
     for (const f of firearms) {
-      const c = f.category || 'handgun';
+      const c = (f.category || 'handgun').toLowerCase();
       if (!cats[c]) cats[c] = { value: 0, count: 0 };
       cats[c].value += f.price ?? 0;
       cats[c].count += 1;
@@ -252,8 +249,9 @@ const Dashboard: React.FC = () => {
       poor: 0,
     };
     for (const f of firearms) {
-      if (f.condition && counts[f.condition] !== undefined) {
-        counts[f.condition]++;
+      const cond = (f.condition || '').toLowerCase() as Condition;
+      if (cond && counts[cond] !== undefined) {
+        counts[cond]++;
       }
     }
     return counts;
