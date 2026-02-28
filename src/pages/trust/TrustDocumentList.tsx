@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useTrustDocumentsStore } from '../../stores/trustDocumentsStore'
 import * as trustDocumentService from '../../services/trustDocumentService'
 import { Button } from '../../components/ui/Button'
@@ -16,6 +16,7 @@ function formatSize(bytes: number): string {
 }
 
 export function TrustDocumentList() {
+  const navigate = useNavigate()
   const { documents, loading, fetchDocuments, removeDocument } = useTrustDocumentsStore()
   const [deleteId, setDeleteId] = useState<string | null>(null)
   const [deleting, setDeleting] = useState(false)
@@ -57,16 +58,14 @@ export function TrustDocumentList() {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.title}>Trust Documents</h1>
-        <Link to="/trust-documents/new">
-          <Button>Upload Document</Button>
-        </Link>
+        <Button onClick={() => navigate('/trust-documents/new')}>Upload Document</Button>
       </div>
 
       {documents.length === 0 ? (
         <EmptyState
           title="No trust documents"
           description="Upload your NFA trust and legal documents here for safekeeping."
-          action={<Link to="/trust-documents/new"><Button variant="secondary">Upload Document</Button></Link>}
+          action={<Button variant="secondary" onClick={() => navigate('/trust-documents/new')}>Upload Document</Button>}
         />
       ) : (
         <div className={styles.list}>

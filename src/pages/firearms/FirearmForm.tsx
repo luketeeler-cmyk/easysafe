@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useFirearmsStore } from '../../stores/firearmsStore';
 import * as firearmService from '../../services/firearmService';
@@ -18,6 +18,7 @@ import { Spinner } from '../../components/ui/Spinner';
 import { PhotoUploader } from '../../components/ui/PhotoUploader';
 import { UrlScrapeInput } from '../../components/ui/UrlScrapeInput';
 import { NfaFields } from './NfaFields';
+import { GUN_DATA } from '../../data/gunData';
 import { toast } from '../../components/ui/Toast';
 import styles from './FirearmForm.module.css';
 
@@ -121,6 +122,13 @@ const FirearmForm: React.FC = () => {
   const [loadingFirearm, setLoadingFirearm] = useState(false);
   const [scraping, setScraping] = useState(false);
 
+  /* Make/Model autocomplete data */
+  const makes = useMemo(() => Object.keys(GUN_DATA), []);
+  const models = useMemo(
+    () => (form.make && GUN_DATA[form.make]) ? GUN_DATA[form.make] : [],
+    [form.make],
+  );
+
   /* Pre-set category from query params when creating new */
   useEffect(() => {
     if (!isEdit) {
@@ -212,11 +220,16 @@ const FirearmForm: React.FC = () => {
       setScraping(false);
 
       if (error || !data) {
-        toast.error('Could not fetch product data');
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : "Couldn't read that URL — please fill in manually",
+        );
         return;
       }
 
       const scraped = data as ScrapedProduct;
+      const filled: string[] = [];
 
       /* Map scraped name into make/model by splitting on first space group */
       if (scraped.name) {
@@ -227,11 +240,13 @@ const FirearmForm: React.FC = () => {
             make: prev.make || parts[0],
             model: prev.model || parts.slice(1).join(' '),
           }));
+          filled.push('Make', 'Model');
         } else {
           setForm((prev) => ({
             ...prev,
             make: prev.make || scraped.name || '',
           }));
+          filled.push('Make');
         }
       }
 
@@ -240,6 +255,7 @@ const FirearmForm: React.FC = () => {
           ...prev,
           make: prev.make || scraped.manufacturer || '',
         }));
+        if (!filled.includes('Make')) filled.push('Make');
       }
 
       if (scraped.model) {
@@ -247,6 +263,7 @@ const FirearmForm: React.FC = () => {
           ...prev,
           model: prev.model || scraped.model || '',
         }));
+        if (!filled.includes('Model')) filled.push('Model');
       }
 
       if (scraped.caliber) {
@@ -254,6 +271,7 @@ const FirearmForm: React.FC = () => {
           ...prev,
           caliber: prev.caliber || scraped.caliber || '',
         }));
+        filled.push('Caliber');
       }
 
       if (scraped.price != null) {
@@ -261,6 +279,15 @@ const FirearmForm: React.FC = () => {
           ...prev,
           price: prev.price || String(scraped.price),
         }));
+        filled.push('Price');
+      }
+
+      if (scraped.barrelLength) {
+        setForm((prev) => ({
+          ...prev,
+          barrel_length: prev.barrel_length || scraped.barrelLength || '',
+        }));
+        filled.push('Barrel Length');
       }
 
       if (scraped.description) {
@@ -268,9 +295,14 @@ const FirearmForm: React.FC = () => {
           ...prev,
           notes: prev.notes || scraped.description || '',
         }));
+        filled.push('Notes');
       }
 
-      toast.success('Product data imported');
+      if (filled.length > 0) {
+        toast.success(`Filled: ${filled.join(', ')}`);
+      } else {
+        toast.error("Couldn't extract product data — please fill in manually");
+      }
     },
     [],
   );
@@ -381,21 +413,37 @@ const FirearmForm: React.FC = () => {
         onDataFetched={() => {}}
       />
 
+      {/* Make/Model datalists */}
+      <datalist id="make-options">
+        {makes.map((m) => (
+          <option key={m} value={m} />
+        ))}
+      </datalist>
+      <datalist id="model-options">
+        {models.map((m) => (
+          <option key={m} value={m} />
+        ))}
+      </datalist>
+
       {/* Main grid */}
       <div className={styles.grid}>
         <Input
           label="Make *"
+          list="make-options"
           value={form.make}
           onChange={(e) => set('make', e.target.value)}
           error={errors.make}
           placeholder="e.g. Smith & Wesson"
+          autoComplete="off"
         />
         <Input
           label="Model *"
+          list="model-options"
           value={form.model}
           onChange={(e) => set('model', e.target.value)}
           error={errors.model}
           placeholder="e.g. M&P Shield"
+          autoComplete="off"
         />
 
         <Input

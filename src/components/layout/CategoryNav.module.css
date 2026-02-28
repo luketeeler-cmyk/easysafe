@@ -85,18 +85,16 @@
   align-items: stretch;
 }
 
-/* ---- Dropdown menu ------------------------------------------------ */
+/* ---- Dropdown menu (portaled to body) ----------------------------- */
 
 .menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
+  position: fixed;
   min-width: 180px;
   background: var(--surface);
   border: 1px solid var(--border-strong);
   border-radius: 0 0 var(--radius) var(--radius);
   box-shadow: var(--shadow);
-  z-index: 100;
+  z-index: 9999;
   overflow: hidden;
 }
 

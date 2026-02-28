@@ -153,7 +153,9 @@ export interface PartAttachment {
   type_category: PartCategory;
   manufacturer: string | null;
   model: string | null;
+  serial: string | null;
   price: number | null;
+  installed_date: string | null;
   notes: string | null;
   photos: PhotoEntry[];
   created_at: string;

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useCallback, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSuppressorsStore } from '../../stores/suppressorsStore';
 import type { Suppressor, TaxStampStatus } from '../../types';
 import { SearchBar } from '../../components/ui/SearchBar';
@@ -186,11 +186,13 @@ const SuppressorList: React.FC = () => {
       {/* Header */}
       <div className={styles.header}>
         <h1 className={styles.title}>Suppressors</h1>
-        <Link to="/suppressors/new" className={styles.addLink}>
-          <Button variant="primary" size="sm">
-            + Add Suppressor
-          </Button>
-        </Link>
+        <Button
+          variant="primary"
+          size="sm"
+          onClick={() => navigate('/suppressors/new')}
+        >
+          + Add Suppressor
+        </Button>
       </div>
 
       {/* Search */}
@@ -219,11 +221,13 @@ const SuppressorList: React.FC = () => {
           }
           action={
             !search ? (
-              <Link to="/suppressors/new">
-                <Button variant="primary" size="sm">
-                  + Add Suppressor
-                </Button>
-              </Link>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => navigate('/suppressors/new')}
+              >
+                + Add Suppressor
+              </Button>
             ) : undefined
           }
         />

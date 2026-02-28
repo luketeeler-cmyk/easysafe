@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useCallback, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAmmunitionStore } from '../../stores/ammunitionStore';
 import type { Ammunition } from '../../types';
 import { SearchBar } from '../../components/ui/SearchBar';
@@ -165,11 +165,13 @@ const AmmunitionList: React.FC = () => {
       {/* Header */}
       <div className={styles.header}>
         <h1 className={styles.title}>Ammunition</h1>
-        <Link to="/ammunition/new" className={styles.addLink}>
-          <Button variant="primary" size="sm">
-            + Add Ammunition
-          </Button>
-        </Link>
+        <Button
+          variant="primary"
+          size="sm"
+          onClick={() => navigate('/ammunition/new')}
+        >
+          + Add Ammunition
+        </Button>
       </div>
 
       {/* Search */}
@@ -199,11 +201,13 @@ const AmmunitionList: React.FC = () => {
           }
           action={
             !search ? (
-              <Link to="/ammunition/new">
-                <Button variant="primary" size="sm">
-                  + Add Ammunition
-                </Button>
-              </Link>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => navigate('/ammunition/new')}
+              >
+                + Add Ammunition
+              </Button>
             ) : undefined
           }
         />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
-import { useNavigate, useSearchParams, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useFirearmsStore } from '../../stores/firearmsStore';
 import type { Firearm, FirearmCategory } from '../../types';
 import { SearchBar } from '../../components/ui/SearchBar';
@@ -226,14 +226,13 @@ const FirearmList: React.FC = () => {
       {/* Header */}
       <div className={styles.header}>
         <h1 className={styles.title}>{pluralLabel}</h1>
-        <Link
-          to={`/firearms/new${category ? `?category=${category}` : ''}`}
-          className={styles.addLink}
+        <Button
+          variant="primary"
+          size="sm"
+          onClick={() => navigate(`/firearms/new${category ? `?category=${category}` : ''}`)}
         >
-          <Button variant="primary" size="sm">
-            + Add {singularLabel}
-          </Button>
-        </Link>
+          + Add {singularLabel}
+        </Button>
       </div>
 
       {/* Search */}
@@ -262,11 +261,13 @@ const FirearmList: React.FC = () => {
           }
           action={
             !search ? (
-              <Link to={`/firearms/new${category ? `?category=${category}` : ''}`}>
-                <Button variant="primary" size="sm">
-                  + Add {singularLabel}
-                </Button>
-              </Link>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => navigate(`/firearms/new${category ? `?category=${category}` : ''}`)}
+              >
+                + Add {singularLabel}
+              </Button>
             ) : undefined
           }
         />

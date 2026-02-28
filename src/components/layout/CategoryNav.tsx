@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { NavLink, useLocation } from 'react-router-dom';
 import styles from './CategoryNav.module.css';
 
@@ -35,19 +36,35 @@ const TABS: TabItem[] = [
 
 const CategoryNav: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [menuPos, setMenuPos] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+
+  /* Compute menu position from trigger button */
+  const updateMenuPos = useCallback(() => {
+    if (triggerRef.current) {
+      const rect = triggerRef.current.getBoundingClientRect();
+      setMenuPos({ top: rect.bottom, left: rect.left });
+    }
+  }, []);
 
   /* Close dropdown when clicking outside */
   useEffect(() => {
+    if (!dropdownOpen) return;
+
     const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      if (
+        triggerRef.current && !triggerRef.current.contains(target) &&
+        menuRef.current && !menuRef.current.contains(target)
+      ) {
         setDropdownOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [dropdownOpen]);
 
   /* Close dropdown on route change */
   useEffect(() => {
@@ -58,21 +75,50 @@ const CategoryNav: React.FC = () => {
     (location.pathname === '/firearms' && location.search === '?category=nfa_firearm') ||
     location.pathname === '/suppressors';
 
+  const handleToggle = () => {
+    if (!dropdownOpen) updateMenuPos();
+    setDropdownOpen((o) => !o);
+  };
+
+  /* Dropdown menu rendered via portal to avoid overflow clipping */
+  const dropdownMenu = dropdownOpen
+    ? createPortal(
+        <div
+          ref={menuRef}
+          className={styles.menu}
+          style={{ top: menuPos.top, left: menuPos.left }}
+        >
+          {(TABS.find((t) => isDropdown(t)) as DropdownTab)?.children.map(
+            (child) => (
+              <NavLink
+                key={child.to}
+                to={child.to}
+                end
+                className={({ isActive }) =>
+                  `${styles.menuItem} ${isActive ? styles.menuItemActive : ''}`
+                }
+              >
+                {child.label}
+              </NavLink>
+            ),
+          )}
+        </div>,
+        document.body,
+      )
+    : null;
+
   return (
     <nav className={styles.nav}>
       <div className={styles.inner}>
         {TABS.map((tab) => {
           if (isDropdown(tab)) {
             return (
-              <div
-                key={tab.label}
-                className={styles.dropdown}
-                ref={dropdownRef}
-              >
+              <div key={tab.label} className={styles.dropdown}>
                 <button
+                  ref={triggerRef}
                   type="button"
                   className={`${styles.tab} ${isNfaActive ? styles.active : ''}`}
-                  onClick={() => setDropdownOpen((o) => !o)}
+                  onClick={handleToggle}
                   aria-expanded={dropdownOpen}
                   aria-haspopup="true"
                 >
@@ -81,22 +127,6 @@ const CategoryNav: React.FC = () => {
                     &#9662;
                   </span>
                 </button>
-                {dropdownOpen && (
-                  <div className={styles.menu}>
-                    {tab.children.map((child) => (
-                      <NavLink
-                        key={child.to}
-                        to={child.to}
-                        end
-                        className={({ isActive }) =>
-                          `${styles.menuItem} ${isActive ? styles.menuItemActive : ''}`
-                        }
-                      >
-                        {child.label}
-                      </NavLink>
-                    ))}
-                  </div>
-                )}
               </div>
             );
           }
@@ -115,6 +145,7 @@ const CategoryNav: React.FC = () => {
           );
         })}
       </div>
+      {dropdownMenu}
     </nav>
   );
 };

@@ -32,7 +32,7 @@ const PART_CATEGORIES = [
   { value: 'other', label: 'Other' },
 ]
 
-const emptyForm = { name: '', type_category: '', manufacturer: '', model: '', price: '', notes: '' }
+const emptyForm = { name: '', type_category: '', manufacturer: '', model: '', serial: '', price: '', installed_date: '', notes: '' }
 
 export function PartsTab({ parentType, parentId }: PartsTabProps) {
   const { parts, loading, fetchParts, addPart, updatePart, removePart } = usePartsStore()
@@ -55,7 +55,9 @@ export function PartsTab({ parentType, parentId }: PartsTabProps) {
       type_category: (form.type_category || undefined) as PartCategory | undefined,
       manufacturer: form.manufacturer || null,
       model: form.model || null,
+      serial: form.serial || null,
       price: form.price ? parseFloat(form.price) : null,
+      installed_date: form.installed_date || null,
       notes: form.notes || null,
       photos: [],
     }
@@ -78,7 +80,9 @@ export function PartsTab({ parentType, parentId }: PartsTabProps) {
       type_category: part.type_category || '',
       manufacturer: part.manufacturer || '',
       model: part.model || '',
+      serial: part.serial || '',
       price: part.price ? String(part.price) : '',
+      installed_date: part.installed_date || '',
       notes: part.notes || '',
     })
     setEditingId(part.id)
@@ -117,7 +121,9 @@ export function PartsTab({ parentType, parentId }: PartsTabProps) {
             <Select label="Type / Category" value={form.type_category} onChange={e => set('type_category', e.target.value)} options={PART_CATEGORIES} />
             <Input label="Manufacturer" value={form.manufacturer} onChange={e => set('manufacturer', e.target.value)} />
             <Input label="Model" value={form.model} onChange={e => set('model', e.target.value)} />
+            <Input label="Serial Number" value={form.serial} onChange={e => set('serial', e.target.value)} placeholder="Optional" />
             <Input label="Price" type="number" step="0.01" value={form.price} onChange={e => set('price', e.target.value)} />
+            <Input label="Installed Date" type="date" value={form.installed_date} onChange={e => set('installed_date', e.target.value)} />
             <Textarea label="Notes" value={form.notes} onChange={e => set('notes', e.target.value)} rows={2} />
           </div>
           <div className={styles.formActions}>
@@ -144,8 +150,14 @@ export function PartsTab({ parentType, parentId }: PartsTabProps) {
                     {[part.manufacturer, part.model].filter(Boolean).join(' ')}
                   </div>
                 )}
+                {part.serial && (
+                  <div className={styles.itemField}><div className={styles.itemLabel}>Serial</div>{part.serial}</div>
+                )}
                 {part.price != null && part.price > 0 && (
                   <div className={styles.itemField}><div className={styles.itemLabel}>Price</div>${part.price.toFixed(2)}</div>
+                )}
+                {part.installed_date && (
+                  <div className={styles.itemField}><div className={styles.itemLabel}>Installed</div>{new Date(part.installed_date).toLocaleDateString()}</div>
                 )}
               </div>
               <div className={styles.itemActions}>
